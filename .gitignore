@@ -14,3 +14,7 @@ node_modules/
 
 # Environment variables
 .env
+
+.vs
+/infrastructure/cdk/cdk.out/
+
