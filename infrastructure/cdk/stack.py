@@ -1,9 +1,7 @@
 from aws_cdk import Stack
 import aws_cdk.aws_dynamodb as dynamodb
-from constructs import Construct  # constructs is now the base library for AWS CDK constructs
+from constructs import Construct
 from dotenv import load_dotenv
-
-
 
 class AirlineTestStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
@@ -11,6 +9,6 @@ class AirlineTestStack(Stack):
 
         table = dynamodb.Table(
             self, "FlightsTable",
-            partition_key=dynamodb.Attribute(name="flight_id", type=dynamodb.AttributeType.STRING)
+            partition_key=dynamodb.Attribute(name="flight_id", type=dynamodb.AttributeType.STRING),
+            table_name="FlightsTable"  # Set custom table name
         )
-

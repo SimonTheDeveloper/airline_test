@@ -1,10 +1,6 @@
-import os
-from typing import List
-
 import boto3
+import os
 from dotenv import load_dotenv
-from fastapi import FastAPI
-from . import schemas, database
 
 # Load environment variables
 load_dotenv()
@@ -22,17 +18,9 @@ dynamodb = session.resource('dynamodb')
 # Reference the DynamoDB table
 table = dynamodb.Table('FlightsTable')
 
-app = FastAPI()
+# Scan the table to get all items
+response = table.scan()
 
-@app.on_event("startup")
-async def startup():
-    await database.connect()
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
-
-@app.get("/flights/", response_model=List[schemas.Flight])
-async def read_flights():
-    response = table.scan()
-    return response['Items']
+# Print the items
+for item in response['Items']:
+    print(item)
