@@ -4,6 +4,7 @@ from typing import List
 import boto3
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from . import schemas, database
 
 # Load environment variables
@@ -23,6 +24,15 @@ dynamodb = session.resource('dynamodb')
 table = dynamodb.Table('FlightsTable')
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust this to your needs
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup():

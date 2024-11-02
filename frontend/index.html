@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
-    <title>Flight Search</title>
+    <title>Airline Test</title>
+    <link href="static/dist/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div x-data="flightSearch()">
-        <!-- UI elements matching Figma design -->
-    </div>
-    <script src="scripts.js"></script>
+    <header>
+        <h1>Flight Information</h1>
+    </header>
+    <main>
+        <div id="flights"></div>
+    </main>
+    <script>
+       async function fetchFlights() {
+        const response = await fetch('http://localhost:8000/flights');
+        const flights = await response.json();
+        const flightsDiv = document.getElementById('flights');
+        flights.forEach(flight => {
+            const flightInfo = document.createElement('div');
+            flightInfo.innerHTML = `<p>Flight ID: ${flight.flight_id}</p>
+                                    <p>Source: ${flight.source}</p>
+                                    <p>Destination: ${flight.sink}</p>
+                                    <p>Airline: ${flight.airline}</p>
+                                    <p>Departure Time: ${flight.departure_dt}</p>
+                                    <p>Arrival Time: ${flight.arrival_dt}</p>
+                                    <p>Number of Stops: ${flight.number_of_stops}</p>
+                                    <p>Emissions: ${flight.emissions}</p>
+                                    <p>Price: ${flight.price}</p>`;
+            flightsDiv.appendChild(flightInfo);
+        });
+    }
+
+    fetchFlights();
+    </script>
 </body>
 </html>
