@@ -3,37 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airline Test</title>
-    <link href="static/dist/styles.css" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <h1>Flight Information</h1>
-    </header>
-    <main>
-        <div id="flights"></div>
-    </main>
-    <script>
-       async function fetchFlights() {
-        const response = await fetch('http://localhost:8000/flights');
-        const flights = await response.json();
-        const flightsDiv = document.getElementById('flights');
-        flights.forEach(flight => {
-            const flightInfo = document.createElement('div');
-            flightInfo.innerHTML = `<p>Flight ID: ${flight.flight_id}</p>
-                                    <p>Source: ${flight.source}</p>
-                                    <p>Destination: ${flight.sink}</p>
-                                    <p>Airline: ${flight.airline}</p>
-                                    <p>Departure Time: ${flight.departure_dt}</p>
-                                    <p>Arrival Time: ${flight.arrival_dt}</p>
-                                    <p>Number of Stops: ${flight.number_of_stops}</p>
-                                    <p>Emissions: ${flight.emissions}</p>
-                                    <p>Price: ${flight.price}</p>`;
-            flightsDiv.appendChild(flightInfo);
-        });
-    }
+    <title>Ajaali Flights</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    fetchFlights();
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="static/styles/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="static/scripts.js" defer></script>
+</head>
+<body class="bg-gray-100 flex justify-center min-h-screen p-4">
+
+<!-- Main Content (restricted to 744px wide) -->
+<div class="w-[744px] max-w-[744px] bg-white shadow-lg">
+    <!-- Navbar -->
+    <nav class="bg-white shadow p-4 border-b border-gray-300">
+        <div class="flex items-center justify-between">
+            <!-- Left Section: Menu Icon and Title -->
+            <div class="flex items-center space-x-4">
+                <!-- Menu Icon (Hamburger) -->
+                <button class="flex flex-col justify-center items-center p-0 gap-2 w-12 h-12">
+                    <span class="block w-6 h-0.5 bg-gray-800"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800"></span>
+                </button>
+
+                <!-- Title -->
+                <h1 class="text-2xl font-medium text-gray-600" style="font-family: 'Roboto', sans-serif;">Ajaali Flights</h1>
+            </div>
+
+            <!-- Profile Avatar Button -->
+            <button class="flex justify-center items-center w-12 h-12 bg-purple-600 text-white rounded-full">
+                S
+            </button>
+        </div>
+    </nav>
+
+    <!-- Search Form -->
+    <div class="w-[696px] bg-white px-4 space-y-2 shadow-md mt-6 mx-auto">
+        <!-- Subfilters Row -->
+        <div class="flex items-center space-x-3 w-full h-8">
+            <!-- Trip Type -->
+            <button class="flex items-center justify-center px-2 w-[133px] h-8 rounded border border-gray-300">
+                <span class="material-icons text-gray-600">sync_alt</span>
+                <span class="text-gray-700 text-sm font-normal ml-1">Round trip</span>
+                <span class="material-icons text-gray-600 ml-auto">expand_more</span>
+            </button>
+
+            <!-- Passengers -->
+            <button class="flex items-center justify-center px-2 w-[76px] h-8 rounded border border-gray-300">
+                <span class="material-icons text-gray-600">person</span>
+                <span class="text-gray-700 text-sm font-normal ml-1">1</span>
+                <span class="material-icons text-gray-600 ml-auto">expand_more</span>
+            </button>
+
+            <!-- Class -->
+            <button class="flex items-center justify-center px-2 w-[100px] h-8 rounded border border-gray-300">
+                <span class="text-gray-700 text-sm font-normal">Economy</span>
+                <span class="material-icons text-gray-600 ml-auto">expand_more</span>
+            </button>
+        </div>
+
+        <!-- Origin/Destination Row -->
+<div class="relative flex space-x-2 w-full h-14">
+    <!-- Origin Field -->
+    <div class="flex items-center px-6 w-1/2 h-full border border-gray-300 rounded">
+        <span class="material-icons text-gray-600">location_on</span>
+        <input type="text" class="ml-2 w-full text-gray-700 text-base font-normal focus:outline-none" placeholder="London">
+    </div>
+
+    <!-- Swap Button (positioned between origin and destination) -->
+    <button class="absolute top-1/2 left-1/2 transform -translate-x-6 -translate-y-1/2 w-8 h-8 rounded-full border border-gray-300 bg-white flex items-center justify-center shadow-md">
+        <span class="material-icons text-gray-600">swap_horiz</span>
+    </button>
+
+    <!-- Destination Field -->
+    <div class="flex items-center px-6 w-1/2 h-full border border-gray-300 rounded">
+        <span class="material-icons text-gray-600">location_on</span>
+        <input type="text" class="ml-2 w-full text-gray-700 text-base font-normal focus:outline-none" placeholder="Amsterdam">
+    </div>
+</div>
+
+
+        <!-- Date Range Row -->
+        <div class="flex items-center w-full h-14 border border-gray-300 rounded">
+            <!-- From Field -->
+            <div class="flex items-center pl-4 w-1/2 h-full border-r border-gray-300">
+                <span class="material-icons text-gray-600">calendar_today</span>
+                <input type="text" class="ml-2 w-full text-gray-700 text-base font-normal focus:outline-none" placeholder="Thu 3 Oct">
+                <!-- Left arrow button for date -->
+                <button class="w-8 h-full flex items-center justify-center" disabled>
+                    <span class="material-icons text-gray-400 opacity-50">chevron_left</span>
+                </button>
+                <!-- Right arrow button for date -->
+                <button class="w-8 h-full flex items-center justify-center">
+                    <span class="material-icons text-gray-600">chevron_right</span>
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="w-px h-full bg-gray-300"></div>
+
+            <!-- To Field -->
+            <div class="flex items-center pl-4 w-1/2 h-full">
+                <span class="material-icons text-gray-600">calendar_today</span>
+                <input type="text" class="ml-2 w-full text-gray-700 text-base font-normal focus:outline-none" placeholder="Thu 10 Oct">
+                <!-- Left arrow button for date -->
+                <button class="w-8 h-full flex items-center justify-center">
+                    <span class="material-icons text-gray-600">chevron_left</span>
+                </button>
+                <!-- Right arrow button for date -->
+                <button class="w-8 h-full flex items-center justify-center">
+                    <span class="material-icons text-gray-600">chevron_right</span>
+                </button>
+            </div>
+
+    </div>
+<div class="relative mt-6 w-[720px] mx-auto">
+    <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <!-- All Filters Button -->
+        <!-- All Filters Button -->
+        <button class="flex items-center justify-center gap-2 px-2 h-8 w-[106px] rounded-full border border-gray-300 text-blue-600 font-medium">
+            <img src="static/icons/filters.png" alt="Filters Icon" class="w-4 h-4">
+            <span>All filters</span>
+        </button>
+
+        <!-- Individual Filter Buttons -->
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[86px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Stops</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[98px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Airlines</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[82px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Bags</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[83px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Price</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[90px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Times</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+
+        <button class="flex items-center justify-center gap-2 px-4 h-8 w-[115px] rounded-lg border border-gray-300 text-gray-600 font-medium">
+            <span>Emissions</span>
+            <span class="material-icons text-gray-500">expand_more</span>
+        </button>
+    </div>
+</div>
+
+        <div class="mt-6 space-y-4">
+    <!-- Header Section -->
+    <div class="flex flex-col gap-2 w-full">
+        <!-- Top Header with title and sort button -->
+        <div class="flex items-center gap-4">
+            <h2 class="text-[20px] font-medium leading-[23px] text-gray-800">Top departing options</h2>
+            <button class="ml-auto flex items-center justify-center gap-2 px-4 h-8 w-[168px] rounded-full border border-gray-300 text-blue-600 font-medium">
+                <span>Sort by: Top flights</span>
+                <span class="material-icons text-blue-600">expand_more</span>
+            </button>
+        </div>
+        <!-- Subtitle and links -->
+        <p class="text-xs text-gray-500 leading-4">
+            Ranked based on price and convenience. Prices include required taxes + fees for 1 adult. Optional charges and
+            <a href="#" class="text-blue-600 hover:underline">bag fees</a> may apply.
+            <a href="#" class="text-blue-600 hover:underline">Passenger assistance info.</a>
+        </p>
+    </div>
+
+    <!-- Flights List -->
+    <div class="flex flex-col gap-0 border border-gray-300 rounded-lg overflow-hidden">
+        <!-- Each Flight Row -->
+        <div class="flex items-center gap-8 p-4 border-b border-gray-300">
+            <div class="w-[35px] h-[35px] flex justify-center items-center">
+                <img src="https://via.placeholder.com/35" alt="Airline Logo" class="w-9 h-9">
+            </div>
+            <div class="flex flex-col flex-1">
+                <span class="text-lg font-medium text-gray-800">16:20 – 18:40</span>
+                <p class="text-sm text-gray-500">LGW – AMS • Non-stop • 1 hr 20 min • British Airways - Operated by BA Euroflyer</p>
+                <p class="text-xs text-gray-500">+19% emissions</p>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-lg font-medium text-gray-800">£138</span>
+                <p class="text-xs text-gray-500">Round trip</p>
+            </div>
+            <button class="ml-4 flex items-center justify-center w-12 h-12 rounded-full text-gray-600">
+                <span class="material-icons">expand_more</span>
+            </button>
+        </div>
+
+        <!-- Repeat for each flight option -->
+        <div class="flex items-center gap-8 p-4 border-b border-gray-300">
+            <div class="w-[35px] h-[35px] flex justify-center items-center">
+                <img src="https://via.placeholder.com/35" alt="Airline Logo" class="w-9 h-9">
+            </div>
+            <div class="flex flex-col flex-1">
+                <span class="text-lg font-medium text-gray-800">18:10 – 20:25</span>
+                <p class="text-sm text-gray-500">LGW – AMS • Non-stop • 1 hr 15 min • easyJet</p>
+                <p class="text-xs text-gray-500">+23% emissions</p>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-lg font-medium text-gray-800">£150</span>
+                <p class="text-xs text-gray-500">Round trip</p>
+            </div>
+            <button class="ml-4 flex items-center justify-center w-12 h-12 rounded-full text-gray-600">
+                <span class="material-icons">expand_more</span>
+            </button>
+        </div>
+
+
+
+
+    <!-- Flight List Section -->
+    <div class="mt-6 space-y-4" id="flight-list">
+        <!-- Flight options will be dynamically inserted here -->
+    </div>
+    </div>
+            <!-- Add additional flights as needed here by duplicating this structure -->
+    </div>
+</div>
+
+
+<script id="flight-template" type="text/template">
+    <div class="flex items-center gap-8 p-4 border-b border-gray-300">
+        <div class="w-[35px] h-[35px] flex justify-center items-center">
+            <img src="https://via.placeholder.com/35" alt="Airline Logo" class="w-9 h-9">
+        </div>
+        <div class="flex flex-col flex-1">
+            <span class="text-lg font-medium text-gray-800">{{departure_dt}} – {{arrival_dt}}</span>
+            <p class="text-sm text-gray-500">{{source}} – {{sink}} • Non-stop • 1 hr 20 min • {{airline}}</p>
+            <p class="text-xs text-gray-500">+{{emissions}}% emissions</p>
+        </div>
+        <div class="flex flex-col items-end">
+            <span class="text-lg font-medium text-gray-800">£{{price}}</span>
+            <p class="text-xs text-gray-500">Round trip</p>
+        </div>
+        <button class="ml-4 flex items-center justify-center w-12 h-12 rounded-full text-gray-600">
+            <span class="material-icons">expand_more</span>
+        </button>
+    </div>
+</script>
+</div>
 </body>
 </html>
