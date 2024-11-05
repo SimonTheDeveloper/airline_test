@@ -1,85 +1,15 @@
-.container {
-    width: 744px;
-    height: 2287px;
-    margin-left: 0;
-    margin-right: auto;
-    background: #FFFFFF;
+body {
+    font-family: 'Roboto';
 
 }
 
-/* styles.css */
-header {
-    width: 744px;
-    height: 64px;
-    padding: 0 8px;
-    gap: 8px;
-    border-bottom: 1px solid;
-    opacity: 0;
-    border-bottom: 1px solid #DADCE0;
+button {
+    font-size: 14px;
 }
 
-/* styles.css */
-.menu-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 8px;
-    width: 48px;
-    height: 48px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    background-color: #FFFFFF; /* Ensure the button has a background color */
-}
-
-.menu-button .state-layer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 8px;
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    background-color: #E0E0E0; /* Ensure the state layer has a background color */
-}
-
-.menu-button .menu {
-    width: 24px;
-    height: 24px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.menu-button .vector {
-    position: absolute;
-    left: 12.5%;
-    right: 12.5%;
-    top: 25%;
-    bottom: 25%;
-    background: #5F6368; /* Ensure the vector has a visible background color */
-}
-
-/* Hide scrollbar for Chrome, Safari, and Opera */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge, and Firefox */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Optional: Extra CSS for smoother scrolling */
-.overflow-x-auto {
-  scroll-behavior: smooth;
+sup {
+    font-size: 0.6em;
+    vertical-align: 0.1em;
+    color: gray;
 }
 

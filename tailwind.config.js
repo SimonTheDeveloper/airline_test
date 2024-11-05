@@ -1,10 +1,16 @@
 module.exports = {
   content: [
-    "./frontend/**/*.html",
+    "./frontend/*.html",
     "./frontend/**/*.js",
+    "/frontend/*.html",
+    "/frontend/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+    fontFamily: {
+        roboto: ['Roboto'], // Define 'roboto' as a font option
+      },
+    },
   },
   plugins: [],
 }
