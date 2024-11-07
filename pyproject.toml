@@ -3,7 +3,6 @@ name = "airline_test"
 version = "0.1.0"
 description = "Coding test set by ajaali consulting"
 authors = ["Your Name <your.email@example.com>"]
-package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.9"

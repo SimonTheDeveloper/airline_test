@@ -4,3 +4,4 @@ boto3
 python-dotenv
 databases
 aiosqlite
+aws-cdk-lib==2.166.0

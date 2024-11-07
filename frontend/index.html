@@ -127,19 +127,19 @@
                         </div>
 
                         <div class="flex flex-col space-y-2">
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="radio" class="form-radio stops-radio" value="Any number of stops">
                                 <span>Any number of stops</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="radio" class="form-radio stops-radio" value="Non-stop only">
                                 <span>Non-stop only</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="radio" class="form-radio stops-radio" value="One stop or fewer">
                                 <span>One stop or fewer</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2  h-12">
                                 <input type="radio" class="form-radio stops-radio" value="Two stops or fewer">
                                 <span>Two stops or fewer</span>
                             </label>
@@ -166,25 +166,25 @@
                         </div>
 
                         <div class="flex flex-col space-y-2">
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="checkbox" class="form-checkbox"
                                        :checked="selectedAirlines.includes('Air France')"
                                        @change="event.target.checked ? selectedAirlines.push('Air France') : selectedAirlines = selectedAirlines.filter(a => a !== 'Air France'); fetchFlights(selectedSortOrder, selectedAirlines, selectedStops)">
                                 <span>Air France</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="checkbox" class="form-checkbox airline-checkbox" value="British Airways">
                                 <span>British Airways</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="checkbox" class="form-checkbox airline-checkbox" value="EASYJET">
                                 <span>easyJet</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="checkbox" class="form-checkbox airline-checkbox" value="KLM">
                                 <span>KLM</span>
                             </label>
-                            <label class="flex items-center space-x-2">
+                            <label class="flex items-center space-x-2 h-12">
                                 <input type="checkbox" class="form-checkbox airline-checkbox" value="WIZZ AIR">
                                 <span>Wizz Air</span>
                             </label>
@@ -245,27 +245,27 @@
                         </div>
 
                          <div class="flex flex-col space-y-2">
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Top flights" x-model="selectedSortOrder">
                 <span>Top flights</span>
             </label>
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Price" x-model="selectedSortOrder">
                 <span>Price</span>
             </label>
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Departure Time" x-model="selectedSortOrder">
                 <span>Departure Time</span>
             </label>
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Arrival Time" x-model="selectedSortOrder">
                 <span>Arrival Time</span>
             </label>
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Duration" x-model="selectedSortOrder">
                 <span>Duration</span>
             </label>
-            <label class="flex items-center space-x-2">
+            <label class="flex items-center space-x-2 h-12">
                 <input type="radio" class="form-radio sort-order-radio" value="Emissions" x-model="selectedSortOrder">
                 <span>Emissions</span>
             </label>
